@@ -35,21 +35,24 @@ const UserMenu = () => {
         </div>
 
         {/* LANGUAGE  */}
-        <div
-          className='
-            flex
-            items-center
-            justify-center
-            rounded-full
-            cursor-pointer
-            transition
-            h-10
-            w-10
-            hover:bg-neutral-100
-          '
-        >
-          <TbWorld size={18} />
+        <div className='hidden md:block'>
+          <div
+            className='
+              flex
+              items-center
+              justify-center
+              rounded-full
+              cursor-pointer
+              transition
+              h-10
+              w-10
+              hover:bg-neutral-100
+            '
+          >
+            <TbWorld size={18} />
+          </div>
         </div>
+        
         {/* MENU BUTTON  */}
         <div
           onClick={toggleOpen}
