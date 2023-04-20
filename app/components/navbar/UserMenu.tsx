@@ -4,6 +4,7 @@ import { AiOutlineMenu } from 'react-icons/ai'
 import Avatar from '../Avatar';
 import { useCallback, useState } from 'react';
 import MenuItem from './MenuItem';
+import { TbWorld } from 'react-icons/tb'
 
 const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -14,7 +15,8 @@ const UserMenu = () => {
 
   return (
     <div className='relative'>
-      <div className='flex flex-row items-center gap-3'>
+      <div className='flex flex-row items-center gap-2'>
+        {/* AIRBNB YOUR HOME  */}
         <div
           className='
             hidden
@@ -31,6 +33,24 @@ const UserMenu = () => {
         >
           Airbnb your home
         </div>
+
+        {/* LANGUAGE  */}
+        <div
+          className='
+            flex
+            items-center
+            justify-center
+            rounded-full
+            cursor-pointer
+            transition
+            h-10
+            w-10
+            hover:bg-neutral-100
+          '
+        >
+          <TbWorld size={18} />
+        </div>
+        {/* MENU BUTTON  */}
         <div
           onClick={toggleOpen}
           className='
@@ -50,9 +70,13 @@ const UserMenu = () => {
           '
         >
           <AiOutlineMenu />
-          <div className='hidden md:block'><Avatar /></div>
+          <div className='hidden md:block'>
+            <Avatar />
+          </div>
         </div>
       </div>
+
+      {/* MENU */}
       {isOpen && (
         <div
           className='

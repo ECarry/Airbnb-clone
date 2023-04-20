@@ -47,7 +47,7 @@ const Search = () => {
             text-center
           "
         >
-          Any Week
+          Any week
         </div>
 
         <div
@@ -62,7 +62,7 @@ const Search = () => {
             gap-3
           "        
         >
-          <div className="hidden sm:block">Add Guests</div>
+          <div className="hidden sm:block">Add guests</div>
           <div className="p-2 bg-rose-500 text-white rounded-full">
             <BiSearch />
           </div>
