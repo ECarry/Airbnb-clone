@@ -2,20 +2,22 @@
 
 interface MenuItemProps {
   onClick: () => void;
-  label: string
+  label: string;
+  light?: boolean;
 }
 
-const MenuItem:React.FC<MenuItemProps> = ({ onClick, label }) => {
+const MenuItem:React.FC<MenuItemProps> = ({ onClick, label, light }) => {
   return (
     <div
       onClick={onClick}
-      className="
-        px-4
-        py-3
-        hover:bg-neutral-300
-        transition
-        font-semibold
-      "
+      className={`
+      px-4
+      py-3
+      hover:bg-neutral-100
+      transition
+      ${light ? 'font-light' : 'font-semibold' }
+      `}
+
     >{label}</div>
   )
 }
