@@ -1,14 +1,17 @@
 'use client'
 
 import useRegisterModal from '@/app/hooks/useRegisterModal'
-import Modal from './Modal'
+
 import { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import axios from 'axios'
+import { toast } from 'react-hot-toast'
+
+import Modal from './Modal'
 import Heading from '../Heading'
 import Input from '../inputs/Input'
-import { toast } from 'react-hot-toast'
 import Button from '../Button'
+
 import { FcGoogle } from 'react-icons/fc'
 import { AiFillGithub } from 'react-icons/ai'
 
