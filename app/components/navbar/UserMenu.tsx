@@ -1,15 +1,19 @@
 'use client';
 
 import { AiOutlineMenu } from 'react-icons/ai'
-import Avatar from '../Avatar';
+import { TbWorld } from 'react-icons/tb'
+
 import { useCallback, useState } from 'react';
 import MenuItem from './MenuItem';
-import { TbWorld } from 'react-icons/tb'
-import useRegisterModal from '@/app/hooks/useRegisterModal';
-import useLoginModal from '@/app/hooks/useLoginModal';
+
 import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import { SafeUser } from '@/app/types';
+
+import Avatar from '../Avatar';
+import useRentModal from '@/app/hooks/useRentModal';
+import useRegisterModal from '@/app/hooks/useRegisterModal';
+import useLoginModal from '@/app/hooks/useLoginModal';
 
 interface UserMenuProps {
   currentUser?: SafeUser | null
@@ -19,19 +23,29 @@ const UserMenu: React.FC<UserMenuProps> = ({
   currentUser
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
+  const rentModal = useRentModal()
+
   const router = useRouter()
 
   const toggleOpen = useCallback(() => {
     setIsOpen(pre => !pre)
   }, [isOpen])
 
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen()
+    }
+  }, [currentUser, loginModal, rentModal])
+
   return (
     <div className='relative'>
       <div className='flex flex-row items-center gap-2'>
         {/* AIRBNB YOUR HOME  */}
         <div
+        onClick={() => currentUser? rentModal.onOpen() : onRent }
           className='
             hidden
             md:block
@@ -130,22 +144,24 @@ const UserMenu: React.FC<UserMenuProps> = ({
               />
               <MenuItem 
                 label="Airbnb your home" 
-                onClick={() => {}}
+                onClick={() => rentModal.onOpen()}
               />
               <hr />
               <MenuItem 
-                label="Logout" 
+                label="Log out"
+                light
                 onClick={() => signOut()}
               />
             </>
             ) : (
               <>
                 <MenuItem 
-                  label="Login" 
+                  label="Log in" 
                   onClick={loginModal.onOpen}
                 />
                 <MenuItem 
                   label="Sign up" 
+                  light
                   onClick={registerModal.onOpen}
                 />
               </>
