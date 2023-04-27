@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { IoMdClose } from 'react-icons/io'
 
 import Button from "../Button";
+import useClickOutClose from "@/app/hooks/useClickOutClose";
 
 interface ModalProps {
   isOpen: boolean;
@@ -31,6 +32,20 @@ const Modal: React.FC<ModalProps> = ({
   secondaryLabel
 }) => {
   const [showModal, setShowModal] = useState(false)
+
+  const ref = useRef(null)
+
+  useClickOutClose(ref, () => {
+    if (disabled) {
+      return
+    }
+
+    setShowModal(false)
+
+    setTimeout(() => {
+      onClose()
+    }, 300)
+  })
 
   useEffect(() => {
     setShowModal(isOpen)
@@ -103,6 +118,7 @@ const Modal: React.FC<ModalProps> = ({
         >
           {/* CONTENT  */}
           <div
+            ref={ref}
             className={`
               translate
               duration-300

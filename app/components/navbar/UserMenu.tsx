@@ -3,7 +3,7 @@
 import { AiOutlineMenu } from 'react-icons/ai'
 import { TbWorld } from 'react-icons/tb'
 
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import MenuItem from './MenuItem';
 
 import { useRouter } from 'next/navigation';
@@ -14,6 +14,7 @@ import Avatar from '../Avatar';
 import useRentModal from '@/app/hooks/useRentModal';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal';
+import useClickOutClose from '@/app/hooks/useClickOutClose';
 
 interface UserMenuProps {
   currentUser?: SafeUser | null
@@ -27,6 +28,12 @@ const UserMenu: React.FC<UserMenuProps> = ({
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
   const rentModal = useRentModal()
+
+  const ref = useRef(null)
+
+  useClickOutClose(ref, () => {
+    setIsOpen(false)
+  })
 
   const router = useRouter()
 
@@ -110,6 +117,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
       {/* MENU */}
       {isOpen && (
         <div
+          ref={ref}
           className='
             absolute
             rounded-xl
