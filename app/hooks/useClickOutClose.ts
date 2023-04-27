@@ -16,7 +16,7 @@ const useClickOutClose = (
     return () => {
       document.removeEventListener('mousedown', handleClick);
     };
-  });
+  }, [handleClick]);
 };
 
 export default useClickOutClose;
