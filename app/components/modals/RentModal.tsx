@@ -97,8 +97,10 @@ const RentModal = () => {
     axios.post('/api/listings', data)
     .then(() => {
       toast.success('Listings created!')
-      router.refresh()
-      reset()
+      router.refresh();
+      reset();
+      setStep(STEPS.CATEGORY)
+      rentModal.onClose();
     })
     .catch(error => {
       toast.error('error')
